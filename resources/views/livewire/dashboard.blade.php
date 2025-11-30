@@ -10,22 +10,34 @@
             <div id="dashboard-page" class="page active">
                 <!-- Stats Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 smooth-transition card-hover">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl 
+                    shadow-sm border border-gray-100 dark:border-gray-700 
+                    smooth-transition card-hover">
                         <div class="flex flex-col space-y-4">
-                            <h3 class="text-gray-500 dark:text-gray-400 font-semibold text-lg">Total Visitor</h3>
-                            <p class="text-4xl font-bold text-blue-600 dark:text-blue-400">{{ $totalVisitors }}</p>
+                            <h3 class="text-gray-500 dark:text-gray-400 
+                            font-semibold text-lg">Total Visitor</h3>
+                            <p class="text-4xl font-bold text-blue-600 
+                            dark:text-blue-400">{{ $totalVisitors }}</p>
                         </div>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 smooth-transition card-hover">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl 
+                    shadow-sm border border-gray-100 dark:border-gray-700 
+                    smooth-transition card-hover">
                         <div class="flex flex-col space-y-4">
-                            <h3 class="text-gray-500 dark:text-gray-400 font-semibold text-lg">Total User</h3>
-                            <p class="text-4xl font-bold text-blue-600 dark:text-blue-400">{{ $totalUsers }}</p>
+                            <h3 class="text-gray-500 dark:text-gray-400 
+                            font-semibold text-lg">Total User</h3>
+                            <p class="text-4xl font-bold text-blue-600 
+                            dark:text-blue-400">{{ $totalUsers }}</p>
                         </div>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 smooth-transition card-hover">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl 
+                    shadow-sm border border-gray-100 dark:border-gray-700 
+                    smooth-transition card-hover">
                         <div class="flex flex-col space-y-4">
-                            <h3 class="text-gray-500 dark:text-gray-400 font-semibold text-lg">Total Product</h3>
-                            <p class="text-4xl font-bold text-blue-600 dark:text-blue-400">{{ $totalProducts }}</p>
+                            <h3 class="text-gray-500 dark:text-gray-400 
+                            font-semibold text-lg">Total Product</h3>
+                            <p class="text-4xl font-bold text-blue-600 
+                            dark:text-blue-400">{{ $totalProducts }}</p>
                         </div>
                     </div>
                 </div>
@@ -33,9 +45,12 @@
                 <!-- Charts -->
                 <div class="grid grid-cols-1 lg:grid-cols-1 gap-8">
                     <!-- Visitor Statistics -->
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 smooth-transition">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl 
+                    shadow-sm border border-gray-100 dark:border-gray-700 smooth-transition">
                         <div class="flex flex-col space-y-6">
-                            <h3 class="text-2xl font-bold dark:text-white">All Statistics</h3>
+                            <h3 class="text-2xl font-bold dark:text-white">
+                                All Statistics
+                            </h3>
                             <div class="w-full h-80">
                                 <canvas id="visitorChart"></canvas>
                             </div>
@@ -50,7 +65,8 @@
 
     <script>
         // Data passed from the Livewire component
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 
+        'September', 'October', 'November', 'December'];
 
         const visitorData = @json($visitors);
         const userData = @json($users);

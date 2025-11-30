@@ -12,8 +12,8 @@
                 <a href="/products" wire:navigate class="px-8 py-3 bg-[#0C2B4E] text-white font-bold rounded-lg hover:bg-[#163e6d] transition-colors">
                     Lihat Menu
                 </a>
-                <a href="{{ route('register') }}" wire:navigate class="px-8 py-3 bg-gray-200 text-gray-800 font-bold rounded-lg hover:bg-gray-300 transition-colors">
-                    Daftar Sekarang
+                <a href="{{ route('login') }}" wire:navigate class="px-8 py-3 bg-gray-200 text-gray-800 font-bold rounded-lg hover:bg-gray-300 transition-colors">
+                    Masuk Sekarang
                 </a>
             </div>
         </div>

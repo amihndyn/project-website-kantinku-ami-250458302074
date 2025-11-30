@@ -37,7 +37,7 @@
                             class="w-full py-4 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 font-semibold text-lg flex items-center justify-center"
                         >
                             <i class="fa-solid fa-credit-card mr-3"></i>
-                            💳 Bayar Sekarang - Rp {{ number_format($product->price * $quantity, 0, ',', '.') }}
+                            Bayar Sekarang - Rp {{ number_format($product->price * $quantity, 0, ',', '.') }}
                         </button>
                     </div>
                 </div>

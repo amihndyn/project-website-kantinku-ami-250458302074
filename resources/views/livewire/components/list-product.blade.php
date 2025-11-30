@@ -1,4 +1,4 @@
-<section class="py-16">
+<section class="py-16" id="menu">
     <div class="max-w-7xl mx-auto px-6">
         <!-- Header Section -->
         <div class="text-center mb-12">

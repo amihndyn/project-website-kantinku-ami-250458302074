@@ -20,6 +20,11 @@
                 :limit="4"
                 :showViewAll="false"
             />
+
+            <!-- Feedback Section -->
+            <livewire:components.feedback
+                title="Ajukan Aduan" 
+            />
         </div>
     </main>
     

@@ -12,15 +12,13 @@
                 <a href="/#home" class="text-white hover:text-[#8FABD4] transition-colors font-medium">Home</a>
                 <a href="/#about" class="text-white hover:text-[#8FABD4] transition-colors font-medium">About</a>
                 <a href="/#menu" class="text-white hover:text-[#8FABD4] transition-colors font-medium">Menu</a>
-                </div>
+                <a href="/#feedback" class="text-white hover:text-[#8FABD4] transition-colors font-medium">Feedback</a>
+            </div>
 
             @guest
             <div class="hidden md:flex items-center gap-4">
                 <a href="{{ route('login') }}" wire:navigate class="px-6 py-2 bg-[#8FABD4] text-white rounded-lg font-semibold hover:bg-[#0C2B4E] transition-colors">
                     Sign In
-                </a>
-                <a href="{{ route('register') }}" wire:navigate class="px-6 py-2 bg-[#8FABD4] text-white rounded-lg font-semibold hover:bg-[#0C2B4E] transition-colors">
-                    Sign Up
                 </a>
             </div>
             @endguest
@@ -33,32 +31,82 @@
             </div>
             @endauth
 
-            <button id="menu-btn" class="md:hidden" aria-label="Toggle menu">
-                <svg xmlns="http://www.w3.org/2000/svg" id="menu-icon-open" class="w-6 h-6 text-[#0C2B4E]" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 6h16M4 12h16m-7 6h7" />
+            <button id="menu-btn" class="md:hidden p-2 rounded-md hover:bg-[#1E3A5F] transition-colors" aria-label="Toggle menu">
+                <svg xmlns="http://www.w3.org/2000/svg" id="menu-icon-open" class="w-6 h-6 text-white" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" id="menu-icon-close" class="w-6 h-6 text-[#0C2B4E] hidden"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <svg xmlns="http://www.w3.org/2000/svg" id="menu-icon-close" class="w-6 h-6 text-white hidden"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
                         d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
-            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Home</a>
-            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">About</a>
-            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Menu</a>
-            <div class="pt-2 border-t border-gray-200 flex gap-2">
-                <a href="#" class="flex-1 px-4 py-2 text-center text-[#0C2B4E] font-semibold hover:bg-gray-100 rounded-lg">
+        <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 bg-white rounded-lg mt-2 shadow-lg transition-all duration-300 ease-in-out">
+            <a href="/#home" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors font-medium">Home</a>
+            <a href="/#about" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors font-medium">About</a>
+            <a href="/#menu" class="block px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors font-medium">Menu</a>
+            <a href="/#feedback" class="text-white hover:text-[#8FABD4] transition-colors font-medium">Feedback</a>
+            <div class="pt-2 border-t border-gray-200">
+                @guest
+                <a href="{{ route('login') }}" class="block px-4 py-3 text-center bg-[#0C2B4E] text-white rounded-lg font-semibold hover:bg-[#1a3a5f] transition-colors">
                     Sign In
                 </a>
-                <a href="#" class="flex-1 px-4 py-2 text-center bg-[#0C2B4E] text-white rounded-lg font-semibold hover:bg-[#0C2B4E]">
-                    Sign Up
-                </a>
+                @endguest
+                @auth
+                <form method="POST" action="/logout">
+                    @csrf
+                    <button class="w-full px-4 py-3 text-center bg-[#8FABD4] text-white rounded-lg font-semibold hover:bg-[#7a9bc7] transition-colors cursor-pointer">
+                        Logout
+                    </button>
+                </form>
+                @endauth
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+            
+            if (menuBtn && mobileMenu && menuIconOpen && menuIconClose) {
+                menuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Mencegah event bubbling
+                    
+                    const isHidden = mobileMenu.classList.contains('hidden');
+                    
+                    if (isHidden) {
+                        mobileMenu.classList.remove('hidden');
+                        menuIconOpen.classList.add('hidden');
+                        menuIconClose.classList.remove('hidden');
+                    } else {
+                        mobileMenu.classList.add('hidden');
+                        menuIconOpen.classList.remove('hidden');
+                        menuIconClose.classList.add('hidden');
+                    }
+                });
+                
+                // Tutup menu mobile saat mengklik di luar
+                document.addEventListener('click', function(event) {
+                    const isClickInsideNav = event.target.closest('nav');
+                    if (!isClickInsideNav && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuIconOpen.classList.remove('hidden');
+                        menuIconClose.classList.add('hidden');
+                    }
+                });
+                
+                // Mencegah menu tertutup saat mengklik menu itu sendiri
+                mobileMenu.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+        });
+    </script>
 </nav>

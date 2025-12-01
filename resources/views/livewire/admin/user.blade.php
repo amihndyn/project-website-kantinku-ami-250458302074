@@ -30,12 +30,18 @@
                                 <th class="px-6 py-4 text-left 
                                     text-sm font-medium text-gray-500 
                                     dark:text-gray-300 uppercase tracking-wider">
-                                        Role
+                                        Email
                                     </th>
+                                
                                 <th class="px-6 py-4 text-left text-sm 
                                     font-medium text-gray-500 
                                     dark:text-gray-300 uppercase tracking-wider">
                                         Telp
+                                    </th>
+                                <th class="px-6 py-4 text-left 
+                                    text-sm font-medium text-gray-500 
+                                    dark:text-gray-300 uppercase tracking-wider">
+                                        Role
                                     </th>
                                 <th class="px-6 py-4 text-left text-sm 
                                     font-medium text-gray-500 
@@ -69,18 +75,22 @@
                                                 </div>
                                             <div class="text-sm text-gray-500 
                                                 dark:text-gray-400">
-                                                    {{ $user->email }}
+                                                    {{ $user->nim }}
                                                 </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm 
-                                    text-gray-900 dark:text-white">
-                                        {{ ucfirst($user->role) }}
+                                    text-gray-500 dark:text-gray-400">
+                                        {{ $user->email }}
                                     </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm 
                                     text-gray-500 dark:text-gray-400">
                                         {{ $user->phone_number }}
+                                    </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm 
+                                    text-gray-900 dark:text-white">
+                                        {{ ucfirst($user->role) }}
                                     </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <button onclick="if(!confirm('Are you sure you want to delete this user?')) 

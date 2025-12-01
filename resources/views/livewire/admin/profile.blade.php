@@ -14,9 +14,9 @@
                 </h2>
 
                 <!-- Profile Information -->
-                <div class="bg-white dark:bg-gray-800 
+                <form class="bg-white dark:bg-gray-800 
                     rounded-xl shadow-sm border border-gray-100 
-                    dark:border-gray-700 p-8 smooth-transition mb-8">
+                    dark:border-gray-700 p-8 smooth-transition mb-8" wire:submit.prevent="update">
                     <div class="flex items-center space-x-6 mb-8">
                         <div class="relative">
                             <div class="w-24 h-24 rounded-full 
@@ -34,7 +34,7 @@
                                 {{ $user->name }}
                             </h3>
                             <p class="text-gray-500 dark:text-gray-400">
-                                {{ ucfirst($user->role) }}
+                                {{ $user->nim }} ({{ ucfirst($user->role) }})
                             </p>
                         </div>
                     </div>
@@ -43,9 +43,9 @@
                         <div>
                             <label class="block text-sm font-medium 
                                 text-gray-700 dark:text-gray-300 mb-2">
-                                First Name
+                                Name
                             </label>
-                            <input type="text" value="{{ $user->name }}" 
+                            <input type="text" wire:model="name" value="{{ $user->name }}" 
                             class="w-full px-4 py-3 border border-gray-300 
                                 dark:border-gray-600 rounded-lg bg-white 
                                 dark:bg-gray-700 text-gray-900 dark:text-white 
@@ -58,6 +58,7 @@
                                 Email
                             </label>
                             <input type="email" 
+                            wire:model="email"
                             value="{{ $user->email }}" 
                             class="w-full px-4 py-3 border border-gray-300 
                                 dark:border-gray-600 rounded-lg bg-white 
@@ -70,7 +71,8 @@
                                 dark:text-gray-300 mb-2">
                                     Phone
                                 </label>
-                            <input type="tel" 
+                            <input type="tel"
+                            wire:model="phone_number" 
                             value="{{ $user->phone_number }}" 
                             class="w-full px-4 py-3 border border-gray-300 
                                 dark:border-gray-600 rounded-lg bg-white 
@@ -81,18 +83,12 @@
                     </div>
 
                     <div class="flex justify-end space-x-3 mt-8">
-                        <button class="px-6 py-3 border border-gray-300 
-                            dark:border-gray-600 text-gray-700 dark:text-gray-300 
-                            rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 
-                            smooth-transition">
-                                Cancel
-                            </button>
                         <button class="px-6 py-3 bg-blue-600 hover:bg-blue-700 
-                            text-white rounded-lg smooth-transition">
+                            text-white rounded-lg smooth-transition" type="submit">
                                 Save Changes
                             </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </main>

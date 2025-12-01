@@ -178,18 +178,54 @@
 
                     <!-- Input Komentar Baru - Hanya untuk yang login -->
                     @auth
-                    <div class="mt-6 relative w-full">
-                        <textarea 
-                            placeholder="Tulis komentarmu..." 
-                            class="w-full px-4 py-3 pr-20 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none text-sm"
-                            rows="2">
-                        </textarea>
-                        <div class="absolute bottom-2 right-2 flex items-center space-x-2">
-                            <div class="flex space-x-1">
+                        <div class="mb-2 mt-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Beri Rating: 
+                                <span id="rating-display" class="text-[#0C2B4E] font-bold ml-1">
+                                    <span id="rating-number">{{ $star ?? 0 }}</span>/5
+                                </span>
+                            </label>
+                            
+                            <!-- Hidden Input untuk Livewire -->
+                            <input 
+                                type="hidden" 
+                                wire:model="star"
+                                id="rating-hidden"
+                                value="{{ $star ?? 0 }}"
+                            >
+                            
+                            <!-- Container untuk bintang rating -->
+                            <div class="flex items-center space-x-1" id="star-container">
                                 @for($i = 1; $i <= 5; $i++)
-                                <button class="text-gray-300 hover:text-yellow-400 text-sm transition duration-200">⭐</button>
+                                    <button 
+                                        type="button"
+                                        class="star-button text-2xl transition duration-200 transform hover:scale-110 {{ 
+                                            ($star ?? 0) >= $i ? 'text-yellow-400' : 'text-gray-300' 
+                                        }}"
+                                        data-value="{{ $i }}"
+                                        wire:click="$set('star', {{ $i }})"
+                                        onclick="updateStarDisplay({{ $i }})"
+                                        onmouseover="hoverStar({{ $i }})"
+                                        onmouseout="resetStars()"
+                                    >
+                                        ★
+                                    </button>
                                 @endfor
+                            
+                            <!-- Label rating -->
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
                             </div>
+                        </div>
+                        
+                        <!-- Textarea untuk komentar -->
+                        <div class="relative mt-4">
+                            <textarea 
+                                placeholder="Tulis komentarmu di sini..." 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8FABD4] focus:border-[#8FABD4] resize-none text-sm transition-colors duration-200"
+                                rows="4"
+                                wire:model.defer="comment"
+                                id="comment-textarea"
+                            ></textarea>
                             <button class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200 text-sm">
                                 Kirim
                             </button>

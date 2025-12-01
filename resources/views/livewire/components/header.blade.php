@@ -26,7 +26,7 @@
                         <p class="text-sm font-medium dark:text-white">{{ $name }}</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">{{ $email }}</p>
                     </div>
-                    <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 smooth-transition" onclick="navigateTo('profile')">
+                    <a href="{{ route('dashboard.profile') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 smooth-transition" onclick="navigateTo('profile')">
                         <i class="fa-solid fa-user text-gray-500"></i>
                         Edit Profile
                     </a>

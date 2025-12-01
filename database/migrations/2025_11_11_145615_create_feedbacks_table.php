@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->text('message');
-            $table->enum('status', ['diterima', 'ditangani', 'selesai']);
             $table->timestamps();
         });
     }

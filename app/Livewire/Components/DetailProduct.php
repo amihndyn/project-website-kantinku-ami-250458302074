@@ -3,8 +3,10 @@
 namespace App\Livewire\Components;
 
 use App\Models\Bookmark;
+use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Product;
+use App\Models\Rating;
 use App\Models\Visit;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -20,6 +22,48 @@ class DetailProduct extends Component
     public $isBookmarked, $bookmarkedText = "Simpan";
 
     protected $listeners = ['openProductDetail' => 'openDetail'];
+
+    public $comment = '';
+    public $star = 0;
+
+    public function submitComment()
+    {
+        if (!Auth::check()) {
+            session()->flash('error', 'Anda harus login terlebih dahulu!');
+            return;
+        }
+
+        $commentId = null;
+
+        if (!empty($this->comment)) {
+            $comment = Comment::create([
+                'user_id' => Auth::id(),
+                'product_id' => $this->product->id,
+                'message' => $this->comment,
+                'created_at' => now()
+            ]);
+
+            $commentId = $comment->id;
+        }
+
+        if ($this->star > 0) {
+            Rating::create([
+                'user_id' => Auth::id(),
+                'product_id' => $this->product->id,
+                'comment_id' => $commentId,
+                'rating' => $this->star,
+                'created_at' => now()
+            ]);
+
+        }
+
+        session()->flash('message', 'Komentar dan rating berhasil ditambahkan!');
+        
+        $this->comment = '';
+        $this->star = 0;
+
+        $this->openDetail($this->product->id);
+    }
 
     public function openDetail($productId)
     {

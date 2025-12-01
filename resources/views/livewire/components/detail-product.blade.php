@@ -124,56 +124,25 @@
                     <h3 class="text-lg font-bold text-[#0C2B4E] mb-4">💬 Komentar Pembeli</h3>
                     
                     <div class="space-y-4 max-h-60 overflow-y-auto w-full">
-                        <!-- Komentar 1 -->
+                        @foreach($product->comments as $comment)
                         <div class="flex space-x-3 w-full">
-                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">A</div>
+                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
+                                {{ strtoupper(substr($comment->user->name, 0, 1)) }}
+                            </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start">
-                                    <span class="font-semibold text-gray-800 truncate">Andi Pratama</span>
+                                    <span class="font-semibold text-gray-800 truncate">{{ $comment->user->name }}</span>
                                     <div class="flex items-center text-yellow-400 text-sm flex-shrink-0 ml-2">
-                                        ⭐⭐⭐⭐⭐
+                                        {{ str_repeat('⭐', $comment->user->ratingForComment($comment->id) ?? 0) }}
                                     </div>
                                 </div>
-                                <p class="text-gray-600 mt-1 text-sm break-words">Rasanya enak banget! Bumbunya meresap sempurna. Bakal pesen lagi nih.</p>
+                                <p class="text-gray-600 mt-1 text-sm break-words">{{ $comment->message }}</p>
                                 <div class="text-xs text-gray-500 mt-1">
-                                    <span>2 jam lalu</span>
+                                    <span>{{ $comment->created_at->diffForHumans() }}</span>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Komentar 2 -->
-                        <div class="flex space-x-3 w-full">
-                            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">S</div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex justify-between items-start">
-                                    <span class="font-semibold text-gray-800 truncate">Sari Indah</span>
-                                    <div class="flex items-center text-yellow-400 text-sm flex-shrink-0 ml-2">
-                                        ⭐⭐⭐⭐
-                                    </div>
-                                </div>
-                                <p class="text-gray-600 mt-1 text-sm break-words">Worth it harganya! Porsinya besar dan rasanya authentic banget.</p>
-                                <div class="text-xs text-gray-500 mt-1">
-                                    <span>5 jam lalu</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Komentar 3 -->
-                        <div class="flex space-x-3 w-full">
-                            <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">R</div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex justify-between items-start">
-                                    <span class="font-semibold text-gray-800 truncate">Rina Wijaya</span>
-                                    <div class="flex items-center text-yellow-400 text-sm flex-shrink-0 ml-2">
-                                        ⭐⭐⭐⭐⭐
-                                    </div>
-                                </div>
-                                <p class="text-gray-600 mt-1 text-sm break-words">Pelayanannya cepat, makanan masih hangat pas sampai. Recommended!</p>
-                                <div class="text-xs text-gray-500 mt-1">
-                                    <span>1 hari lalu</span>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
                     <!-- Input Komentar Baru - Hanya untuk yang login -->
@@ -226,7 +195,9 @@
                                 wire:model.defer="comment"
                                 id="comment-textarea"
                             ></textarea>
-                            <button class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200 text-sm">
+                            <button 
+                                wire:click="submitComment"
+                                class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200 text-sm">
                                 Kirim
                             </button>
                         </div>

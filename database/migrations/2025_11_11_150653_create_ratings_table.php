@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('product_id');
+            $table->bigInteger('comment_id')->nullable();;
             $table->integer('rating');
             $table->timestamp('created_at');
         });

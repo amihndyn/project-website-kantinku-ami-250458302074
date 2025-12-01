@@ -42,6 +42,13 @@ class User extends Authenticatable
                     ->first();
     }
 
+   public function ratingForComment($commentId)
+    {
+        return $this->ratings()->where('comment_id', $commentId)->first()?->rating;
+    }
+
+
+
     // Relasi ke tabel lain
     public function feedbacks()
     {
